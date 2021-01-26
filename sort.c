@@ -15,8 +15,8 @@ void singleThreadedMergeSort(int arr[], int left, int right)
 
 static void * thread_ms(void * arg)
 {
-  printf("sum is now: %d \n", sum);
-  sum++;
+  printf("sum is now: %d \n", arg);
+  arg++;
 }
 
 /* 
@@ -29,7 +29,7 @@ void multiThreadedMergeSort(int arr[], int left, int right)
   
   for(int i=0; i< 4; i++)
   {
-    pthread_create(&threads[i], NULL, thread_ms,(void*)NULL);
+    pthread_create(&threads[i], NULL, thread_ms,(void*)sum);
   }
 
   for(int j=0; j<4; j++)
