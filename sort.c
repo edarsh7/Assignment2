@@ -1,5 +1,5 @@
 #include "merge.h" 
-#include "cstdio.h"
+#include <stdio.h>
 #include <pthread.h> 
 
 /* LEFT index and RIGHT index of the sub-array of ARR[] to be sorted */
