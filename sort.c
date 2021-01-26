@@ -16,7 +16,7 @@ void singleThreadedMergeSort(int arr[], int left, int right)
 static void * thread_ms(void * arg)
 {
   int *arr_ptr = (int *)arg;
-  printf("sum is now: %d \n", arr_ptr+1);
+  printf("sum is now: %d \n", arr_ptr[1]);
   
 }
 
