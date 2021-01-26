@@ -30,7 +30,7 @@ void multiThreadedMergeSort(int arr[], int left, int right)
   
   for(int i=0; i< 4; i++)
   {
-    pthread_create(&threads[i], NULL, thread_ms,(void*)sum);
+    pthread_create(&threads[i], NULL, thread_ms,&sum);
   }
 
   for(int j=0; j<4; j++)
