@@ -1,4 +1,6 @@
 #include "merge.h"
+#include <iostream> 
+#include <pthread.h> 
 
 /* LEFT index and RIGHT index of the sub-array of ARR[] to be sorted */
 void singleThreadedMergeSort(int arr[], int left, int right) 
@@ -11,13 +13,28 @@ void singleThreadedMergeSort(int arr[], int left, int right)
   } 
 }
 
+void * thread_ms(void * arg)
+{
+  printf("sum is now: %d \n", sum);
+  sum++;
+}
+
 /* 
  * This function stub needs to be completed
  */
 void multiThreadedMergeSort(int arr[], int left, int right) 
 {
-  // Delete this line, it's only here to fail the code quality check
-  int i = 0;
+  pthread_t threads[4];
+  int sum = 0;
+  
+  for(int i=0; i< 4; i++)
+  {
+    pthread_create(&threads[i], NULL, thread_ms,(void*)NULL)
+  }
 
-  // Your code goes here 
+  for(int j=0; j<4; j++)
+  {
+    pthread_join(threads[i], NULL);
+  }
+
 }
