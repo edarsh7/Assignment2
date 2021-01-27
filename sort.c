@@ -2,7 +2,12 @@
 #include <stdio.h>
 #include <pthread.h> 
 
-int curr_td = 0;                                                                                                                                                                                                                                                                          
+int curr_td = 0;
+
+typedef struct arr_props{
+  int* values;
+  int size;
+}arr_props;                                                                                                                                                                                                                                                                       
 
 /* LEFT index and RIGHT index of the sub-array of ARR[] to be sorted */
 void singleThreadedMergeSort(int arr[], int left, int right) 
@@ -17,21 +22,6 @@ void singleThreadedMergeSort(int arr[], int left, int right)
 
 void * thread_ms(void * arg)
 {
-  int x = curr_td++;
-  int thread_part = part++; 
-  
-    // calculating low and high 
-    int low = thread_part * (MAX / 4); 
-    int high = (thread_part + 1) * (MAX / 4) - 1; 
-  
-    // evaluating mid point 
-    int mid = low + (high - low) / 2; 
-    if (low < high) { 
-        singleThreadedMergeSort(arg, low, mid); 
-        singleThreadedMergeSort(arg, mid + 1, high); 
-        merge(low, mid, high); 
-    } 
-  
   
 }
 
@@ -40,6 +30,14 @@ void * thread_ms(void * arg)
  */
 void multiThreadedMergeSort(int arr[], int left, int right) 
 {
+  arr_props new_arr;
+  new_arr.size = sizeof(arr)/sizeof(arr[0]);
+  new_arr.values = (int*)malloc(sizeof(int)*new_arr.size);
+
+  memcpy(new_arr.values, arr, new_arr.size);
+  printf("arx= %d\n", new_arr.values[0]);
+
+
   pthread_t threads[4];
   
   
