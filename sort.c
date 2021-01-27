@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <pthread.h> 
 
+int curr_td = 0;                                                                                                                                                                                                                                                                          
+
 /* LEFT index and RIGHT index of the sub-array of ARR[] to be sorted */
 void singleThreadedMergeSort(int arr[], int left, int right) 
 {
@@ -13,10 +15,10 @@ void singleThreadedMergeSort(int arr[], int left, int right)
   } 
 }
 
-static void * thread_ms(void * arg)
+void * thread_ms(void * arg)
 {
-  int *arr_ptr = (int *)arg;
-  printf("sum is now: %d \n", arr_ptr[1]);
+  printf("curr_td: %d \n",curr_td);
+
   
 }
 
@@ -26,11 +28,11 @@ static void * thread_ms(void * arg)
 void multiThreadedMergeSort(int arr[], int left, int right) 
 {
   pthread_t threads[4];
-  int array[3] = {3,1,0};
+  
   
   for(int i=0; i< 4; i++)
   {
-    pthread_create(&threads[i], NULL, thread_ms,(void *)array);
+    pthread_create(&threads[i], NULL, thread_ms,(void *)arr);
   }
 
   for(int j=0; j<4; j++)
