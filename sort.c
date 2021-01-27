@@ -37,17 +37,17 @@ void * thread_ms_hf(void * half)
   pthread_t left_td_hf;
   pthread_t right_td_hf;
 
-  int mid_hf = (hf_strct->left + hf_strct->right)/2 ;
+  int mid_hf = ((*hf_struct).left + (*hf_struct).right)/2 ;
 
   a_struct a_left_hf;
-  a_left_hf.values = (*hf_strct).values;
-  a_left_hf.left = (*hf_strct).left;
+  a_left_hf.values = (*hf_struct).values;
+  a_left_hf.left = (*hf_struct).left;
   a_left_hf.right = mid_hf;
 
   a_struct a_right_hf;
-  a_right_hf.values = (*hf_strct).values;
+  a_right_hf.values = (*hf_struct).values;
   a_right_hf.left = mid_hf + 1;
-  a_right_hf.right = (*hf_strct).right;
+  a_right_hf.right = (*hf_struct).right;
 
 
   pthread_create(&left_td_hf, NULL, thread_ms_qt, (void *)&a_left_hf);
@@ -56,7 +56,7 @@ void * thread_ms_hf(void * half)
   pthread_join(left_td_hf, NULL);
   pthread_join(right_td_hf, NULL);
 
-  merge((*hf_strct).values, (*hf_strct).left, mid_hf, (*hf_strct).right);
+  merge((*hf_struct).values, (*hf_struct).left, mid_hf, (*hf_struct).right);
 
   return NULL;
 }
