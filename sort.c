@@ -49,10 +49,10 @@ void * thread_ms_hf(void * half)
   int mid_hf = ((*hf_struct).left + (*hf_struct).right)/2 ;
 
   a_struct a_left_hf;
-  a_struct_init(a_left_hf, (*hf_struct).values, (*hf_struct).left, mid_hf );
+  a_struct_init(&a_left_hf, (*hf_struct).values, (*hf_struct).left, mid_hf );
 
   a_struct a_right_hf;
-  a_struct_init(a_right_hf, (*hf_struct).values, mid_hf+1, (*hf_struct).right);
+  a_struct_init(&a_right_hf, (*hf_struct).values, mid_hf+1, (*hf_struct).right);
 
 
   pthread_create(&left_td_hf, NULL, thread_ms_qt, (void *)&a_left_hf);
@@ -77,10 +77,10 @@ void multiThreadedMergeSort(int arr[], int left, int right)
   int middle = (left+right)/2;
 
   a_struct a_left;
-  a_struct_init(a_left, arr, left, middle);
+  a_struct_init(&a_left, arr, left, middle);
 
   a_struct a_right;
-  a_struct_init(a_right, arr, middle+1, right);
+  a_struct_init(&a_right, arr, middle+1, right);
 
 
   pthread_create(&left_td, NULL, thread_ms_hf, (void *)&a_left);
