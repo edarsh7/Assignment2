@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <pthread.h> 
 
-int curr_td = 0;
-
 typedef struct arr_props{
   int* values;
   int left;
