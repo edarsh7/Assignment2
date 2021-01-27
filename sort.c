@@ -1,6 +1,6 @@
 #include "merge.h" 
 #include <stdio.h>
-#include <cstdlib.h>
+#include <stdlib.h>
 #include <string.h>
 #include <pthread.h> 
 
