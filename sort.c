@@ -27,7 +27,7 @@ void * thread_ms_qt(void * strct)
 {
   a_struct * td_strct = (a_struct *) strct;
 
-  int mid_qt = (td_strct->left + td_strct->right)/2
+  int mid_qt = (td_strct->left + td_strct->right)/2;
 
   singleThreadedMergeSort(td_strct->values, td_strct->left, td_strct->right);
 }
@@ -38,7 +38,7 @@ void * thread_ms_hf(void * strct)
 {
   a_struct * td_strct = (a_struct *) strct;
 
-  int mid_2 = (td_strct->left + td_strct->right)/2
+  int mid_2 = (td_strct->left + td_strct->right)/2 ;
 
   a_struct a_left_2;
   a_left_2.values = td_strct->values;
@@ -67,7 +67,7 @@ void * thread_ms_hf(void * strct)
  */
 void multiThreadedMergeSort(int arr[], int left, int right) 
 {
-  int middle = (left+right)/2
+  int middle = (left+right)/2;
 
   a_struct a_left;
   a_left.values = arr;
