@@ -7,14 +7,7 @@ typedef struct arr_props{
   int* values;
   int left;
   int right;
-}a_struct;                             
-
-void a_struct_init(a_struct block, int arr[], int left, int right)
-{
-  block.values = arr;
-  block.left = left;
-  block.right = right;
-}
+}a_struct;                                                                                                                                                                                                                                                                       
 
 /* LEFT index and RIGHT index of the sub-array of ARR[] to be sorted */
 void singleThreadedMergeSort(int arr[], int left, int right) 
@@ -27,7 +20,7 @@ void singleThreadedMergeSort(int arr[], int left, int right)
   } 
 }
 
-/* This function will sort a quarter of the array based on the thread passed in*/
+/* This function will sort a quarter of the array based on the thread passed*/
 void * thread_ms_qt(void * strct)
 {
   a_struct * qt_strct = (a_struct *) strct;
@@ -49,10 +42,14 @@ void * thread_ms_hf(void * half)
   int mid_hf = ((*hf_struct).left + (*hf_struct).right)/2 ;
 
   a_struct a_left_hf;
-  a_struct_init(a_left_hf, (*hf_struct).values, (*hf_struct).left, mid_hf);
+  a_left_hf.values = (*hf_struct).values;
+  a_left_hf.left = (*hf_struct).left;
+  a_left_hf.right = mid_hf;
 
   a_struct a_right_hf;
-  a_struct_init(a_right_hf, (*hf_struct).values, mid_hf+1, (*hf_struct).right);
+  a_right_hf.values = (*hf_struct).values;
+  a_right_hf.left = mid_hf + 1;
+  a_right_hf.right = (*hf_struct).right;
 
 
   pthread_create(&left_td_hf, NULL, thread_ms_qt, (void *)&a_left_hf);
@@ -77,10 +74,15 @@ void multiThreadedMergeSort(int arr[], int left, int right)
   int middle = (left+right)/2;
 
   a_struct a_left;
-  a_struct_init(a_left, arr, left, middle);
+  a_left.values = arr;
+  a_left.left = left;
+  a_left.right = middle;
 
   a_struct a_right;
-  a_struct_init(a_left, arr, middle+1, right);
+  a_right.values = arr;
+  a_right.left = middle + 1;
+  a_right.right = right;
+
 
   pthread_create(&left_td, NULL, thread_ms_hf, (void *)&a_left);
   pthread_create(&right_td, NULL, thread_ms_hf, (void*)&a_right);
