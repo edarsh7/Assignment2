@@ -59,7 +59,7 @@ void * thread_ms_hf(void * strct)
   pthread_join(left_td_2, NULL);
   pthread_join(right_td_2, NULL);
 
-  singleThreadedMergeSort(td_strct->values, td_strct->left, td_strct->right);
+  merge(td_strct->values, td_strct->left, mid_2, td_strct->right);
 }
 
 /* 
