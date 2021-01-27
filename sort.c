@@ -27,8 +27,6 @@ void * thread_ms_qt(void * strct)
 {
   a_struct * td_strct = (a_struct *) strct;
 
-  int mid_qt = (td_strct->left + td_strct->right)/2;
-
   singleThreadedMergeSort(td_strct->values, td_strct->left, td_strct->right);
 }
 
@@ -63,7 +61,7 @@ void * thread_ms_hf(void * strct)
 }
 
 /* 
- * This function stub needs to be completed
+ * This function will create two threads to sort their respective halves of the same array using structures as arguments passed to pthread_create
  */
 void multiThreadedMergeSort(int arr[], int left, int right) 
 {
