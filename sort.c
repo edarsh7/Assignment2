@@ -24,6 +24,8 @@ void * thread_ms_qt(void * strct)
   a_struct * td_strct = (a_struct *) strct;
 
   singleThreadedMergeSort(td_strct->values, td_strct->left, td_strct->right);
+
+  return NULL;
 }
 
 
@@ -54,6 +56,8 @@ void * thread_ms_hf(void * strct)
   pthread_join(right_td_2, NULL);
 
   merge(td_strct->values, td_strct->left, mid_2, td_strct->right);
+
+  return NULL;
 }
 
 /* 
@@ -83,5 +87,7 @@ void multiThreadedMergeSort(int arr[], int left, int right)
   pthread_join(right_td, NULL);
   
   merge(arr, left, middle, right);
+  
+  return NULL;
 
 }
