@@ -1,4 +1,5 @@
 #include "merge.h" 
+
 #include <stdio.h>
 #include <pthread.h> 
 
@@ -19,6 +20,7 @@ void singleThreadedMergeSort(int arr[], int left, int right)
   } 
 }
 
+/* This function will sort a quarter of the array based on the thread passed in*/
 void * thread_ms_qt(void * strct)
 {
   a_struct * qt_strct = (a_struct *) strct;
@@ -29,7 +31,7 @@ void * thread_ms_qt(void * strct)
 }
 
 
-
+/* This function is called by the original pthread_create. It will create two more halves from its half and merge them after sorting from pthread_create function merge sort*/
 void * thread_ms_hf(void * half)
 {
   a_struct * hf_struct = (a_struct *) half;
