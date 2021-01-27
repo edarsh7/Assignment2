@@ -17,7 +17,7 @@ void singleThreadedMergeSort(int arr[], int left, int right)
 
 void * thread_ms(void * arg)
 {
-  printf("curr_td: %d \n",curr_td);
+  printf("curr_td: %d \n",curr_td++);
 
   
 }
