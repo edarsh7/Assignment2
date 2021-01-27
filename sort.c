@@ -18,7 +18,19 @@ void singleThreadedMergeSort(int arr[], int left, int right)
 void * thread_ms(void * arg)
 {
   int x = curr_td++;
-  printf("curr_td: %d \n",x);
+  int thread_part = part++; 
+  
+    // calculating low and high 
+    int low = thread_part * (MAX / 4); 
+    int high = (thread_part + 1) * (MAX / 4) - 1; 
+  
+    // evaluating mid point 
+    int mid = low + (high - low) / 2; 
+    if (low < high) { 
+        singleThreadedMergeSort(arg, low, mid); 
+        singleThreadedMergeSort(arg, mid + 1, high); 
+        merge(low, mid, high); 
+    } 
   
   
 }
