@@ -31,10 +31,10 @@ void * thread_ms(void * arg)
 void multiThreadedMergeSort(int arr[], int left, int right) 
 {
   arr_props new_arr;
-  new_arr.size = sizeof(arr)/sizeof(arr[0]);
-  new_arr.values = (int*)malloc(sizeof(int)*new_arr.size);
+  new_arr.size = right;
+  new_arr.values = (int*)malloc(sizeof(int)*(right+1));
 
-  memcpy(new_arr.values, arr, new_arr.size);
+  memcpy(new_arr.values, arr, right+1);
   printf("arx= %d\n", new_arr.values[0]);
 
 
