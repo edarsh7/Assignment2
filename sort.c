@@ -1,5 +1,6 @@
 #include "merge.h" 
 #include <stdio.h>
+#include <cstdlib.h>
 #include <pthread.h> 
 
 int curr_td = 0;
