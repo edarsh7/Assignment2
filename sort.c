@@ -9,7 +9,7 @@ typedef struct arr_props{
   int right;
 }a_struct;                             
 
-void a_struct_init(a_struct block, int arr[], int left, int right);
+void a_struct_init(a_struct block, int arr[], int left, int right)
 {
   block.values = arr;
   block.left = left;
