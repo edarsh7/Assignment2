@@ -87,7 +87,5 @@ void multiThreadedMergeSort(int arr[], int left, int right)
   pthread_join(right_td, NULL);
   
   merge(arr, left, middle, right);
-  
-  return NULL;
 
 }
