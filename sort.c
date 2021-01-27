@@ -21,41 +21,42 @@ void singleThreadedMergeSort(int arr[], int left, int right)
 
 void * thread_ms_qt(void * strct)
 {
-  a_struct * td_strct = (a_struct *) strct;
+  a_struct * qt_strct = (a_struct *) strct;
 
-  singleThreadedMergeSort(td_strct->values, td_strct->left, td_strct->right);
+  singleThreadedMergeSort((*qt_strct).values, (*qt_strct).left, (*qt_strct).right);
 
   return NULL;
 }
 
 
 
-void * thread_ms_hf(void * strct)
+void * thread_ms_hf(void * half)
 {
-  a_struct * td_strct = (a_struct *) strct;
+  a_struct * hf_struct = (a_struct *) half;
 
-  int mid_2 = (td_strct->left + td_strct->right)/2 ;
+  pthread_t left_td_hf;
+  pthread_t right_td_hf;
 
-  a_struct a_left_2;
-  a_left_2.values = td_strct->values;
-  a_left_2.left = td_strct->left;
-  a_left_2.right = mid_2;
+  int mid_hf = (hf_strct->left + hf_strct->right)/2 ;
 
-  a_struct a_right_2;
-  a_right_2.values = td_strct->values;
-  a_right_2.left = mid_2 + 1;
-  a_right_2.right = td_strct->right;
+  a_struct a_left_hf;
+  a_left_hf.values = (*hf_strct).values;
+  a_left_hf.left = (*hf_strct).left;
+  a_left_hf.right = mid_hf;
 
-  pthread_t left_td_2;
-  pthread_t right_td_2;
+  a_struct a_right_hf;
+  a_right_hf.values = (*hf_strct).values;
+  a_right_hf.left = mid_hf + 1;
+  a_right_hf.right = (*hf_strct).right;
 
-  pthread_create(&left_td_2, NULL, thread_ms_qt, (void *)&a_left_2);
-  pthread_create(&right_td_2, NULL, thread_ms_qt, (void*)&a_right_2);
 
-  pthread_join(left_td_2, NULL);
-  pthread_join(right_td_2, NULL);
+  pthread_create(&left_td_hf, NULL, thread_ms_qt, (void *)&a_left_hf);
+  pthread_create(&right_td_hf, NULL, thread_ms_qt, (void*)&a_right_hf);
 
-  merge(td_strct->values, td_strct->left, mid_2, td_strct->right);
+  pthread_join(left_td_hf, NULL);
+  pthread_join(right_td_hf, NULL);
+
+  merge((*hf_strct).values, (*hf_strct).left, mid_hf, (*hf_strct).right);
 
   return NULL;
 }
@@ -65,6 +66,9 @@ void * thread_ms_hf(void * strct)
  */
 void multiThreadedMergeSort(int arr[], int left, int right) 
 {
+  pthread_t left_td;
+  pthread_t right_td;
+
   int middle = (left+right)/2;
 
   a_struct a_left;
@@ -77,8 +81,6 @@ void multiThreadedMergeSort(int arr[], int left, int right)
   a_right.left = middle + 1;
   a_right.right = right;
 
-  pthread_t left_td;
-  pthread_t right_td;
 
   pthread_create(&left_td, NULL, thread_ms_hf, (void *)&a_left);
   pthread_create(&right_td, NULL, thread_ms_hf, (void*)&a_right);
